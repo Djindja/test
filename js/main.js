@@ -140,21 +140,6 @@ function isEmptyValue(value) {
     return value == null || value === "";
 }
 
-// function emailActive() {
-//     const email = document.getElementById("header__link--email");
-//     const mobile = document.getElementById("header__link--mobile");
-//     email.classList.add("active");
-//     mobile.classList.remove("active");
-// }
-
-// function mobileActive() {
-//     const email = document.getElementById("header__link--email");
-//     const mobile = document.getElementById("header__link--mobile");
-//     mobile.classList.add("active");
-//     email.classList.remove("active");
-// }
-
-
 /* I used jQuery here, just as example for emailActive/mobileActive */
 // $(document).ready(function () {
 //     $('a.header__link').click(function () {

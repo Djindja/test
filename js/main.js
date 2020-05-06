@@ -1,17 +1,17 @@
 function validateRegistrationForm() {
     const privacyPolicy = isPrivacyPolicy(document.getElementById('checkbox_privacy_policy'));
     const validEmail = validateEmail(document.getElementById('email'));
-    // const validMobile = validateMobile(document.getElementById('mobile'));
+    const validMobile = validateMobile(document.getElementById('mobile'));
 
     if (privacyPolicy && validEmail) {
         loader();
     }
 
-    // if (privacyPolicy && validMobile) {
-    //     loader();
-    // }
+    if (privacyPolicy && validMobile) {
+        loader();
+    }
  
-    return privacyPolicy && validEmail;
+    return (privacyPolicy && validEmail) || (privacyPolicy && validMobile);
 }
 
 function validateEmail(emailElement) {
@@ -40,7 +40,7 @@ function validateEmail(emailElement) {
 
 function validateMobile(numberElement) {
     const value = numberElement.value;
-    const re = /^-?\d+\.?\d*$/;
+    const re = /^\d{6,10}$/;
     const isValid = re.test(value);
 
     if (isEmptyValue(value)) {
@@ -52,7 +52,7 @@ function validateMobile(numberElement) {
 
     if (!isValid) {
         const numberErrElement = document.getElementById('mobile_error');
-        emailElement.classList.add('with-error');
+        numberElement.classList.add('with-error');
         showElement(numberErrElement);
     } else {
         const numberErrElement = document.getElementById('mobile_error');
@@ -60,18 +60,6 @@ function validateMobile(numberElement) {
     }
 
     return isValid;
-}
-
-function showElement(element) {
-    element.classList.remove("invisible");
-}
-
-function hideElement(element) {
-    element.classList.add("invisible");
-}
-
-function isEmptyValue(value) {
-    return value == null || value === "";
 }
 
 function isPrivacyPolicy(checkboxElement) {
@@ -86,7 +74,7 @@ function isPrivacyPolicy(checkboxElement) {
     }
 }
 
-function onInputKeydown(e) {
+function onInputKeyDown(e) {
     if (e.target.value || e.target.value.length === 0) {
         const errElem = document.getElementById('email_error');
         e.target.classList.remove('with-error');
@@ -101,45 +89,76 @@ function onInputKeydown(e) {
 }
 
 function loader() {
-    document.getElementById('loader').style.display = 'block';
+    const loader = document.getElementById('loader');
+    showElement(loader);
 
     setTimeout(function () {
-        document.getElementById('confirm').style.display = 'block';
-        document.getElementById('loader').style.display = 'none';
+        const confirm = document.getElementById('confirm');
+        showElement(confirm);
+        hideElement(loader);
     }, 3000);
 }
 
-function setupListeners() {
-    const email = document.getElementById('email');
-    const mobile = document.getElementById('mobile');
-    email.onkeydown = onInputKeydown;
-    mobile.onkeydown = onInputKeydown;
+function emailForm() {
+    showElement(document.getElementById("signup__email"));
+    hideElement(document.getElementById("signup__mobile"));
+
+    const email = document.getElementById("header__link--email");
+    const mobile = document.getElementById("header__link--mobile");
+    email.classList.add("active");
+    mobile.classList.remove("active");
 }
 
-setupListeners();
+function mobileForm() {
+    showElement(document.getElementById("signup__mobile"));
+    hideElement(document.getElementById("signup__email"));
+
+    const email = document.getElementById("header__link--email");
+    const mobile = document.getElementById("header__link--mobile");
+    mobile.classList.add("active");
+    email.classList.remove("active");
+}
+
+function privacyPolicy() {
+    const checkbox = document.getElementById("checkbox_privacy_policy").checked;
+    const checkError = document.getElementById("checkbox_error");
+    if (checkbox)
+        hideElement(checkError)
+    else
+        showElement(checkError)
+}
+
+function showElement(element) {
+    element.classList.remove("invisible");
+}
+
+function hideElement(element) {
+    element.classList.add("invisible");
+}
+
+function isEmptyValue(value) {
+    return value == null || value === "";
+}
+
+// function emailActive() {
+//     const email = document.getElementById("header__link--email");
+//     const mobile = document.getElementById("header__link--mobile");
+//     email.classList.add("active");
+//     mobile.classList.remove("active");
+// }
+
+// function mobileActive() {
+//     const email = document.getElementById("header__link--email");
+//     const mobile = document.getElementById("header__link--mobile");
+//     mobile.classList.add("active");
+//     email.classList.remove("active");
+// }
 
 
-$(document).ready(function () {
-    $('#checkbox_privacy_policy').change(function () {
-        if (this.checked)
-            $('#checkbox_error').hide();
-        else
-            $('#checkbox_error').show();
-    });
-
-    $('.header__link.mobile').click(function () {
-        $('.signup__form_group.mobile').show();
-        $('.signup__form_group.email').hide();
-    });
-
-    $('.header__link.email').click(function () {
-        $('.signup__form_group.email').show();
-        $('.signup__form_group.mobile').hide();
-    });
-
-    $('a.header__link').on('click', function () {
-        $('a.header__link.active').removeClass('active');
-        $(this).addClass('active');
-    });
-});
-
+/* I used jQuery here, just as example for emailActive/mobileActive */
+// $(document).ready(function () {
+//     $('a.header__link').click(function () {
+//         $('a.header__link.active').removeClass('active');
+//         $(this).addClass('active');
+//     });
+// });

@@ -1,13 +1,10 @@
-function validateRegistrationForm() {
+function validateRegistrationForm(e) {
+    e.preventDefault();
     const privacyPolicy = isPrivacyPolicy(document.getElementById('checkbox_privacy_policy'));
     const validEmail = validateEmail(document.getElementById('email'));
     const validMobile = validateMobile(document.getElementById('mobile'));
 
-    if (privacyPolicy && validEmail) {
-        loader();
-    }
-
-    if (privacyPolicy && validMobile) {
+    if (privacyPolicy && (validEmail || validMobile)) {
         loader();
     }
  
@@ -76,15 +73,13 @@ function isPrivacyPolicy(checkboxElement) {
 
 function onInputKeyDown(e) {
     if (e.target.value || e.target.value.length === 0) {
-        const errElem = document.getElementById('email_error');
-        e.target.classList.remove('with-error');
-        hideElement(errElem);
-    }
+        const errElemEmail = document.getElementById("email_error");
+        e.target.classList.remove("with-error");
+        hideElement(errElemEmail);
 
-    if (e.target.value || e.target.value.length === 0) {
-        const errElem = document.getElementById('mobile_error');
-        e.target.classList.remove('with-error');
-        hideElement(errElem);
+        const errElemMobile = document.getElementById("mobile_error");
+        e.target.classList.remove("with-error");
+        hideElement(errElemMobile);
     }
 }
 

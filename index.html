@@ -33,7 +33,7 @@
             <div id="signup__email" class="signup__form_group email">
                 <div class="signup__row">
                     <div class="signup__col">
-                        <input type="email" class="signup__input" id="email" name="email" placeholder="Email" onkeydown="onInputKeyDown(event)">
+                        <input type="email" class="signup__input" id="email" name="email" placeholder="Email" onkeydown="onInputKeyDownEmail(event)">
                         <span id="email_error" class="signup__error invisible">Invalid email format.</span>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
             <div id="signup__mobile" class="signup__form_group mobile invisible">
                 <div class="signup__row">
                     <div class="signup__col">
-                        <input type="mobile" class="signup__input" id="mobile" name="mobile" placeholder="Mobile" onkeydown="onInputKeyDown(event)">
+                        <input type="mobile" class="signup__input" id="mobile" name="mobile" placeholder="Mobile" onkeydown="onInputKeyDownMobile(event)">
                         <span id="mobile_error" class="signup__error invisible">Invalid mobile format.</span>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
             </div>
 
             <div class="signup__form_group">
-                <label class="signup__checkbox"><input type="checkbox" id="checkbox_privacy_policy" onchange="privacyPolicy()"> I accept the <a href="#">Terms of
+                <label class="signup__checkbox"><input type="checkbox" id="checkbox_privacy_policy" onchange="onChangePrivacyPolicy()"> I accept the <a href="#">Terms of
                         Use</a> &amp; <a href="#">Privacy Policy</a></label>
                 <span id="checkbox_error" class="signup__error invisible">Please check Privacy Policy.</span>
             </div>

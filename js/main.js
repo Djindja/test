@@ -1,6 +1,6 @@
 function validateRegistrationForm(e) {
     e.preventDefault();
-    const privacyPolicy = isPrivacyPolicy(document.getElementById('checkbox_privacy_policy'));
+    const privacyPolicy = isPrivacyPolicyChecked(document.getElementById('checkbox_privacy_policy'));
     const validEmail = validateEmail(document.getElementById('email'));
     const validMobile = validateMobile(document.getElementById('mobile'));
 
@@ -59,7 +59,7 @@ function validateMobile(numberElement) {
     return isValid;
 }
 
-function isPrivacyPolicy(checkboxElement) {
+function isPrivacyPolicyChecked(checkboxElement) {
     const value = checkboxElement.checked;
     const checkboxErrElement = document.getElementById('checkbox_error');
     if (value) {
@@ -71,12 +71,16 @@ function isPrivacyPolicy(checkboxElement) {
     }
 }
 
-function onInputKeyDown(e) {
+function onInputKeyDownEmail(e) {
     if (e.target.value || e.target.value.length === 0) {
         const errElemEmail = document.getElementById("email_error");
         e.target.classList.remove("with-error");
         hideElement(errElemEmail);
+    }
+}
 
+function onInputKeyDownMobile(e) {
+    if (e.target.value || e.target.value.length === 0) {
         const errElemMobile = document.getElementById("mobile_error");
         e.target.classList.remove("with-error");
         hideElement(errElemMobile);
@@ -150,13 +154,11 @@ function mobileForm() {
     hideElement(checkboxError);
 }
 
-function privacyPolicy() {
+function onChangePrivacyPolicy() {
     const checkbox = document.getElementById("checkbox_privacy_policy").checked;
     const checkError = document.getElementById("checkbox_error");
     if (checkbox)
         hideElement(checkError)
-    else
-        showElement(checkError)
 }
 
 function showElement(element) {

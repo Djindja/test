@@ -105,8 +105,26 @@ function emailForm() {
 
     const email = document.getElementById("header__link--email");
     const mobile = document.getElementById("header__link--mobile");
+    const confirm = document.getElementById('confirm');
+
+    hideElement(confirm);
     email.classList.add("active");
     mobile.classList.remove("active");
+
+    document.getElementById("email").value = ""
+    document.getElementById("checkbox_privacy_policy").checked = false;
+    document.getElementById("checkbox_notification").checked = false;
+    document.getElementById("euro").checked = false;
+    document.getElementById("dollar").checked = false;
+
+    const emailInput = document.getElementById("email");
+    emailInput.classList.remove("with-error");
+
+    const emailError = document.getElementById("email_error");
+    hideElement(emailError);
+
+    const checkboxError = document.getElementById("checkbox_error");
+    hideElement(checkboxError);
 }
 
 function mobileForm() {
@@ -115,8 +133,26 @@ function mobileForm() {
 
     const email = document.getElementById("header__link--email");
     const mobile = document.getElementById("header__link--mobile");
+    const confirm = document.getElementById('confirm');
+
+    hideElement(confirm);
     mobile.classList.add("active");
     email.classList.remove("active");
+
+    document.getElementById("mobile").value = ""
+    document.getElementById("checkbox_privacy_policy").checked = false;
+    document.getElementById("checkbox_notification").checked = false;
+    document.getElementById("euro").checked = false;
+    document.getElementById("dollar").checked = false;
+
+    const mobileInput = document.getElementById("mobile");
+    mobileInput.classList.remove("with-error");
+
+    const mobError = document.getElementById("mobile_error");
+    hideElement(mobError);
+
+    const checkboxError = document.getElementById("checkbox_error");
+    hideElement(checkboxError);
 }
 
 function privacyPolicy() {
